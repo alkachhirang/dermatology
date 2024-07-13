@@ -11,6 +11,17 @@ module.exports = {
         archivo: ['"Archivo", sans-serif;'],
         kaushan: ['"Kaushan Script", cursive;'],
       },
+      fontSize:{
+        md:'32px',
+      },
+      colors:{
+        lightGreen:'#679277',
+        darkGreen:'#001008',
+        darkgrey:'#001008b2',
+        lightgrey:'#0010080f',
+        offgrey:'#696969',
+
+      },
     },
   },
   plugins: [],
