@@ -11,7 +11,7 @@ export default function Appointment() {
                             <span className="w-[60px] h-[2px] bg-lightGreen"></span>
                         </div>
                         <h2 className="font-archivo text-darkGreen mb-3 capitalize text-5xl font-semibold max-w-[484px] leading-[130%]">Book Your Appointment Now</h2>
-                    <p className="font-archivo text-grey font-normal text-base">Have questions or ready to schedule your appointment? Reach out to our friendly team today. <span className="text-lightGreen">Click  here  to  Instantly  Book  Online</span></p>
+                    <p className="font-archivo text-grey font-normal text-base">Have questions or ready to schedule your appointment? Reach out to our friendly team today. <span className="text-lightGreen cursor-pointer">Click  here  to  Instantly  Book  Online</span></p>
                     </div>
                     <div className="w-[48%]">
                         <Image src="/assets/images/png/appointment.png" alt="appointment-img" width={546} height={769} />
