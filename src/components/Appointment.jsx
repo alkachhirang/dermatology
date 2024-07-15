@@ -67,8 +67,9 @@ export default function Appointment() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const errors = validateForm();
+        console.log('Form errors:', errors); // Check errors in console
         setFormErrors(errors);
-
+    
         if (Object.keys(errors).length === 0) {
             try {
                 const response = await fetch('/api/submit-form', {
@@ -78,9 +79,10 @@ export default function Appointment() {
                     },
                     body: JSON.stringify(formData),
                 });
-
+    
                 if (response.ok) {
-                    setShowSuccessPopup(true);
+                    setShowSuccessPopup(true); // Show success popup on successful submission
+                    console.log('Form submitted successfully');
                 } else {
                     console.error('Form submission failed');
                 }
@@ -91,6 +93,7 @@ export default function Appointment() {
     };
 
     const handlePopupClose = () => {
+        console.log('Closing success popup');
         setShowSuccessPopup(false);
         setFormData({
             name: "",
@@ -103,6 +106,7 @@ export default function Appointment() {
         setFormErrors({
             name: "",
             lastname: "",
+            phoneNumber: "",
             box: "",
         });
     };
@@ -145,13 +149,13 @@ export default function Appointment() {
         <div className='mt-[55px] mb-[54px]'>
             <div className="container xl:max-w-[1164px] px-3 mx-auto">
                 <div className="flex flex-row flex-wrap justify-between items-center">
-                    <div className="lg:w-[47.81%] w-full lg:order-1 order-2">
+                    <div className="lg:w-[47.81%] w-full lg:order-1 order-2 mt-4 lg:mt-0">
                         <div className="flex gap-4 items-center justify-center lg:justify-start mb-[10px]">
                             <h1 className="font-kaushan font-normal text-lightGreen text-md leading-[144%]">Appointment</h1>
                             <span className="w-[60px] h-[2px] bg-lightGreen"></span>
                         </div>
-                        <h2 className="font-archivo text-darkGreen mb-3 uppercase text-5xl font-semibold lg:max-w-[484px] leading-[130%] text-center lg:text-start">Book Your Appointment Now</h2>
-                        <p className="font-archivo text-grey font-normal text-base text-center lg:text-start">Have questions or ready to schedule your appointment? Reach out to our friendly team today. <span className="text-lightGreen cursor-pointer">Click here to Instantly Book Online</span></p>
+                        <h2 className="font-archivo text-darkGreen mb-2 sm:mb-3 uppercase text-3xl sm:text-4xl md:text-5xl font-semibold lg:max-w-[484px] leading-[130%] text-center lg:text-start">Book Your Appointment Now</h2>
+                        <p className="font-archivo text-grey font-normal text-sm sm:text-base text-center lg:text-start">Have questions or ready to schedule your appointment? Reach out to our friendly team today. <span className="text-lightGreen cursor-pointer">Click here to Instantly Book Online</span></p>
                         <form className="mt-[24px]" onSubmit={handleSubmit}>
                             <div className='flex sm:flex-row flex-col sm:gap-4'>
                                 <div className="lg:max-w-[265px] w-full mb-3 sm:mb-[14px]">
@@ -238,9 +242,9 @@ export default function Appointment() {
                             )}
                             {selectedAppointmentOption === "More Information" && (
                                 <div className="w-full mb-3 sm:mb-[14px]">
-                                    <input
+                                      <textarea
                                         required
-                                        className="text-base bg-offWhite !text-offgrey placeholder:text-offgrey placeholder:!text-opacity-70 text-opacity-70 h-[50px] font-archivo font-normal p-[13px] outline-none w-full border-solid border border-lightgrey"
+                                        className="text-base resize-none bg-offWhite !text-offgrey placeholder:text-offgrey placeholder:!text-opacity-70 text-opacity-70 h-[106px] font-archivo font-normal p-[13px] outline-none w-full border-solid border border-lightgrey"
                                         type="text"
                                         placeholder="information"
                                         id="appointmentDetail"
