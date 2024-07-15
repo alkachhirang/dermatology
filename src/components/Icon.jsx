@@ -1,8 +1,8 @@
-export const Arrow = ({ onClick, rotated }) => {
+
+export const Arrow = () => {
     return (
         <svg
-            onClick={onClick}
-            className={`cursor-pointer transition-all duration-300 ease-linear ${rotated ? 'rotate-180' : ''}`}
+            className='cursor-pointer transition-all duration-300 ease-linear'
             width="20"
             height="20"
             viewBox="0 0 20 20"
@@ -27,21 +27,3 @@ export const Arrow = ({ onClick, rotated }) => {
         </svg>
     );
 };
-
-
-    {/* <div className="w-full mb-3 sm:mb-[14px]">
-                                <textarea required className="resize-none bg-offWhite !text-offgrey font-archivo text-base font-normal p-[13px] outline-none w-full border-solid border border-lightgrey"
-                                        type="text"
-                                        placeholder="Secure Message"
-                                        id="SecureMessage"
-                                        name="SecureMessage"
-                                        rows="1"
-                                        cols="10"   
-                                        value={formData.SecureMessage}
-                                        onChange={handleChange}
-                                        autoComplete="off"
-                                    />
-                                    {formErrors.SecureMessage && (
-                                        <p className="error-message font-archivo">{formErrors.SecureMessage}</p>
-                                    )}
-                                </div> */}

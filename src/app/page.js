@@ -7,7 +7,6 @@ export default function Home() {
     <main className="">
      <>
      <Appointment/>
-     {/* <Dropdown/> */}
      </>
     </main>
   );
