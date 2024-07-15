@@ -3,7 +3,6 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import Dropdown from "./Dropdown";
 import CheckboxGreen from "./CheckboxGreen";
-import { contact, information } from "./Helper";
 
 const contactOptions = ["Phone Call", "Secure Message"];
 const appointmentOptions = ["Appointment", "More Information"];
@@ -15,18 +14,17 @@ export default function Appointment() {
         phoneNumber: "",
         message: "",
         appointmentDetail: "",
-        box: false,
     });
 
     const [formErrors, setFormErrors] = useState({
         name: "",
         lastname: "",
-        box: "",
+        phoneNumber: "",
     });
 
     const [showSuccessPopup, setShowSuccessPopup] = useState(false);
-    const [selectedContactOption, setSelectedContactOption] = useState(contactOptions[0]); // default option
-    const [selectedAppointmentOption, setSelectedAppointmentOption] = useState(appointmentOptions[0]); // default option
+    const [selectedContactOption, setSelectedContactOption] = useState(contactOptions[0]);
+    const [selectedAppointmentOption, setSelectedAppointmentOption] = useState(appointmentOptions[0]);
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -48,6 +46,7 @@ export default function Appointment() {
         const regex = {
             name: /^[a-zA-Z\s]+$/,
             lastname: /^[a-zA-Z\s]+$/,
+            phoneNumber: /^\d{10}$/,
         };
         const errors = {};
         if (!regex.name.test(formData.name)) {
@@ -55,6 +54,9 @@ export default function Appointment() {
         }
         if (!regex.lastname.test(formData.lastname)) {
             errors.lastname = "Last Name is invalid.";
+        }
+        if (!regex.phoneNumber.test(formData.phoneNumber)) {
+            errors.phoneNumber = "Phone Number is invalid.";
         }
         if (!formData.box) {
             errors.box = "You must agree to the terms of services and privacy policy.";
@@ -199,6 +201,9 @@ export default function Appointment() {
                                         onChange={handleChange}
                                         autoComplete="off"
                                     />
+                                      {formErrors.phoneNumber && (
+                                    <p className="error-message font-archivo">{formErrors.phoneNumber}</p>
+                                )}
                                 </div>
                             )}
                             {selectedContactOption === "Secure Message" && (
