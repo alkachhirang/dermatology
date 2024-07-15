@@ -14,12 +14,16 @@ export default function Appointment() {
         phoneNumber: "",
         message: "",
         appointmentDetail: "",
+        box: false,
     });
 
     const [formErrors, setFormErrors] = useState({
         name: "",
         lastname: "",
         phoneNumber: "",
+        message: "",
+        appointmentDetail: "",
+        box: "",
     });
 
     const [showSuccessPopup, setShowSuccessPopup] = useState(false);
@@ -55,7 +59,7 @@ export default function Appointment() {
         if (!regex.lastname.test(formData.lastname)) {
             errors.lastname = "Last Name is invalid.";
         }
-        if (!regex.phoneNumber.test(formData.phoneNumber)) {
+        if (selectedContactOption === "Phone Call" && !regex.phoneNumber.test(formData.phoneNumber)) {
             errors.phoneNumber = "Phone Number is invalid.";
         }
         if (!formData.box) {
@@ -67,33 +71,14 @@ export default function Appointment() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const errors = validateForm();
-        console.log('Form errors:', errors); // Check errors in console
         setFormErrors(errors);
-    
+
         if (Object.keys(errors).length === 0) {
-            try {
-                const response = await fetch('/api/submit-form', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData),
-                });
-    
-                if (response.ok) {
-                    setShowSuccessPopup(true); // Show success popup on successful submission
-                    console.log('Form submitted successfully');
-                } else {
-                    console.error('Form submission failed');
-                }
-            } catch (error) {
-                console.error('Form submission error:', error);
-            }
+            setShowSuccessPopup(true);
         }
     };
 
     const handlePopupClose = () => {
-        console.log('Closing success popup');
         setShowSuccessPopup(false);
         setFormData({
             name: "",
@@ -107,25 +92,10 @@ export default function Appointment() {
             name: "",
             lastname: "",
             phoneNumber: "",
+            message: "",
+            appointmentDetail: "",
             box: "",
         });
-    };
-
-    const handleContactOptionSelect = (option) => {
-        setSelectedContactOption(option);
-        setFormData((prevFormData) => ({
-            ...prevFormData,
-            phoneNumber: option === 'Phone' ? '' : prevFormData.phoneNumber,
-            message: option === 'Message' ? '' : prevFormData.message,
-        }));
-    };
-
-    const handleAppointmentOptionSelect = (option) => {
-        setSelectedAppointmentOption(option);
-        setFormData((prevFormData) => ({
-            ...prevFormData,
-            appointmentDetail: "",
-        }));
     };
 
     useEffect(() => {
@@ -145,6 +115,23 @@ export default function Appointment() {
         };
     }, [showSuccessPopup]);
 
+    const handleContactOptionSelect = (option) => {
+        setSelectedContactOption(option);
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            phoneNumber: option === 'Phone Call' ? '' : prevFormData.phoneNumber,
+            message: option === 'Secure Message' ? '' : prevFormData.message,
+        }));
+    };
+
+    const handleAppointmentOptionSelect = (option) => {
+        setSelectedAppointmentOption(option);
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            appointmentDetail: "",
+        }));
+    };
+
     return (
         <div className='mt-[55px] mb-[54px]'>
             <div className="container xl:max-w-[1164px] px-3 mx-auto">
@@ -154,7 +141,7 @@ export default function Appointment() {
                             <h1 className="font-kaushan font-normal text-lightGreen text-md leading-[144%]">Appointment</h1>
                             <span className="w-[60px] h-[2px] bg-lightGreen"></span>
                         </div>
-                        <h2 className="font-archivo text-darkGreen mb-2 sm:mb-3 uppercase text-3xl sm:text-4xl md:text-5xl font-semibold lg:max-w-[484px] leading-[130%] text-center lg:text-start">Book Your Appointment Now</h2>
+                        <h2 className="font-archivo text-darkGreen mb-2 sm:mb-3 uppercase text-3xl sm:text-4xl xl:text-5xl font-semibold lg:max-w-[484px] leading-[130%] text-center lg:text-start">Book Your Appointment Now</h2>
                         <p className="font-archivo text-grey font-normal text-sm sm:text-base text-center lg:text-start">Have questions or ready to schedule your appointment? Reach out to our friendly team today. <span className="text-lightGreen cursor-pointer">Click here to Instantly Book Online</span></p>
                         <form className="mt-[24px]" onSubmit={handleSubmit}>
                             <div className='flex sm:flex-row flex-col sm:gap-4'>
@@ -205,9 +192,9 @@ export default function Appointment() {
                                         onChange={handleChange}
                                         autoComplete="off"
                                     />
-                                      {formErrors.phoneNumber && (
-                                    <p className="error-message font-archivo">{formErrors.phoneNumber}</p>
-                                )}
+                                    {formErrors.phoneNumber && (
+                                        <p className="error-message font-archivo">{formErrors.phoneNumber}</p>
+                                    )}
                                 </div>
                             )}
                             {selectedContactOption === "Secure Message" && (
@@ -227,7 +214,7 @@ export default function Appointment() {
                             <Dropdown defaultSelected={selectedAppointmentOption} onSelect={handleAppointmentOptionSelect} dropdownList={appointmentOptions} />
                             {selectedAppointmentOption === "Appointment" && (
                                 <div className="w-full mb-3 sm:mb-[14px]">
-                                   <textarea
+                                    <textarea
                                         required
                                         className="text-base resize-none bg-offWhite !text-offgrey placeholder:text-offgrey placeholder:!text-opacity-70 text-opacity-70 h-[106px] font-archivo font-normal p-[13px] outline-none w-full border-solid border border-lightgrey"
                                         type="text"
@@ -242,7 +229,7 @@ export default function Appointment() {
                             )}
                             {selectedAppointmentOption === "More Information" && (
                                 <div className="w-full mb-3 sm:mb-[14px]">
-                                      <textarea
+                                    <textarea
                                         required
                                         className="text-base resize-none bg-offWhite !text-offgrey placeholder:text-offgrey placeholder:!text-opacity-70 text-opacity-70 h-[106px] font-archivo font-normal p-[13px] outline-none w-full border-solid border border-lightgrey"
                                         type="text"
@@ -267,21 +254,19 @@ export default function Appointment() {
                                     <p onChange={handleChange} className="error-message font-plusJkarta">{formErrors.box}</p>
                                 )}
                             </div>
-                            <button type="submit" className="text-white border border-solid border-transparent font-archivo text-8md font-medium px-[24px] py-[14px] leading-[112%] bg-lightGreen uppercase hover:border-lightGreen hover:bg-transparent hover:text-lightGreen transition-all duration-300 ease-linear">Contact Us</button>
+                            <button className="text-white border border-solid border-transparent font-archivo sm:text-8md text-base font-medium px-[22px] py-[12px] sm:px-[24px] sm:py-[14px] leading-[112%] bg-lightGreen uppercase hover:border-lightGreen hover:bg-transparent hover:text-lightGreen transition-all duration-300 ease-linear">Contact Us</button>
                         </form>
                         {showSuccessPopup && (
-                            <div className="success-popup fixed top-[50%] left-[50%] h-[200px] sm:h-[280px] md:h-[350px] w-full max-w-[300px] sm:max-w-[500px] md:max-w-[550px] lg:max-w-[600px] bg-white border border-solid border-lightGreen p-[20px] sm:p-[40px] rounded shadow-[0px_0px_10px_0px_#0000001A] flex justify-center items-center flex-col translate-x-[-50%] translate-y-[-50%] z-[50]">
-                                <p className="mb-[40px] text-lightGreen text-xl sm:text-3xl font-semibold font-archivo text-center leading-lg">Submit successfully!</p>
-                                <div className="flex justify-center items-center">
-                                    <div className='w-full'>
-                                        <button onClick={handlePopupClose} className="text-white border border-solid border-transparent font-archivo text-8md font-medium px-[24px] py-[14px] leading-[112%] bg-lightGreen uppercase hover:border-lightGreen hover:bg-transparent hover:text-lightGreen transition-all duration-300 ease-linear">OK</button>
-                                    </div>
+                            <div onClick={handlePopupClose} className="success-popup fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
+                                <div className="bg-white border-[2px] border-solid border-lightGreen p-8 rounded shadow-lg text-center">
+                                    <p className="mb-6 text-lightGreen text-xl sm:text-2xl font-semibold font-archivo">Submit successfully!</p>
+                                    <button onClick={handlePopupClose} className="text-white border border-solid border-transparent font-archivo text-base sm:text-8md font-medium px-[20px] py-[10px] sm:px-[22px] sm:py-[11px] leading-[112%] bg-lightGreen uppercase hover:border-lightGreen hover:bg-transparent hover:text-lightGreen transition-all duration-300 ease-linear">OK</button>
                                 </div>
                             </div>
                         )}
                     </div>
                     <div className="lg:w-[48%] w-full lg:order-2 order-1">
-                        <Image src="/assets/images/png/appointment.png" alt="appointment-img" width={546} height={769} className="lg:w-[546px] lg:h-[769px] w-full" />
+                        <Image src="/assets/images/png/appointment.png" alt="appointment-img" width={546} height={769} className="lg:w-[546px] xl:h-[769px] w-full" />
                     </div>
                 </div>
             </div>
