@@ -7,7 +7,7 @@ const Dropdown = ({ defaultSelected, onSelect, dropdownList }) => {
     const [selectedOption, setSelectedOption] = useState(defaultSelected);
     const catMenu = useRef(null);
 
-    const closeOpenMenus = (e) => {
+    const closedropdown = (e) => {
         if (
             dropdownActive &&
             catMenu.current &&
@@ -18,9 +18,9 @@ const Dropdown = ({ defaultSelected, onSelect, dropdownList }) => {
     };
 
     useEffect(() => {
-        document.addEventListener("mousedown", closeOpenMenus);
+        document.addEventListener("mousedown", closedropdown);
         return () => {
-            document.removeEventListener("mousedown", closeOpenMenus);
+            document.removeEventListener("mousedown", closedropdown);
         };
     }, [dropdownActive]);
 
