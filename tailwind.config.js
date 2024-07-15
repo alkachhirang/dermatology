@@ -12,6 +12,7 @@ module.exports = {
         kaushan: ['"Kaushan Script", cursive;'],
       },
       fontSize:{
+        '8md':'18px',
         md:'32px',
       },
       colors:{
@@ -20,6 +21,11 @@ module.exports = {
         darkgrey:'#001008b2',
         lightgrey:'#0010080f',
         offgrey:'#696969',
+        offWhite: '#FFFFFF52',
+        lightBlack:'#929693',
+        offGreen:'#F1FFF5',
+        cGreen:'#6E9277',
+
 
       },
     },

@@ -160,18 +160,18 @@ export default function Appointment() {
     }, [showSuccessPopup]);
 
     return (
-        <div className='mt-[55px] mb-[54px]'>
+        <div className='mt-[55px]'>
             <div className="container xl:max-w-[1164px] px-3 mx-auto">
                 <div className="flex flex-row flex-wrap justify-between items-center">
-                    <div className="lg:w-[47.81%] w-full lg:order-1 order-2">
-                        <div className="flex gap-4 items-center justify-center lg:justify-start mb-[10px]">
+                    <div className="w-[47%]">
+                        <div className="flex gap-4 items-center mb-[10px]">
                             <h1 className="font-kaushan font-normal text-lightGreen text-md leading-[144%]">Appointment</h1>
                             <span className="w-[60px] h-[2px] bg-lightGreen"></span>
                         </div>
-                        <h2 className="font-archivo text-darkGreen mb-3 uppercase text-5xl font-semibold lg:max-w-[484px] leading-[130%] text-center lg:text-start">Book Your Appointment Now</h2>
-                        <p className="font-archivo text-grey font-normal text-base text-center lg:text-start">Have questions or ready to schedule your appointment? Reach out to our friendly team today. <span className="text-lightGreen cursor-pointer">Click here to Instantly Book Online</span></p>
-                        <form className="mt-[24px]" onSubmit={handleSubmit}>
-                            <div className='flex sm:flex-row flex-col sm:gap-4'>
+                        <h2 className="font-archivo text-darkGreen mb-3 capitalize text-5xl font-semibold max-w-[484px] leading-[130%]">Book Your Appointment Now</h2>
+                        <p className="font-archivo text-grey font-normal text-base">Have questions or ready to schedule your appointment? Reach out to our friendly team today. <span className="text-lightGreen cursor-pointer">Click here to Instantly Book Online</span></p>
+                        <form className="lg:mt-[10px]" onSubmit={handleSubmit}>
+                        <div className='flex sm:flex-row flex-col sm:gap-4'>
                                 <div className="lg:max-w-[265px] w-full mb-3 sm:mb-[14px]">
                                     <input
                                         required
@@ -352,21 +352,21 @@ export default function Appointment() {
                                     <p onChange={handleChange} className="error-message font-plusJkarta">{formErrors.box}</p>
                                 )}
                             </div>
-                            <button type="submit" className="text-white border border-solid border-transparent font-archivo text-8md font-medium px-[24px] py-[14px] leading-[112%] bg-lightGreen uppercase hover:border-lightGreen hover:bg-transparent hover:text-lightGreen transition-all duration-300 ease-linear">Contact Us</button>
+                            <button className="w-full flex justify-center">submit</button>
                         </form>
                         {showSuccessPopup && (
-                            <div className="success-popup fixed top-[50%] left-[50%] h-[200px] sm:h-[280px] md:h-[350px] w-full max-w-[300px] sm:max-w-[500px] md:max-w-[550px] lg:max-w-[600px] bg-white border border-solid border-lightGreen p-[20px] sm:p-[40px] rounded shadow-[0px_0px_10px_0px_#0000001A] flex justify-center items-center flex-col translate-x-[-50%] translate-y-[-50%] z-[50]">
-                                <p className="mb-[40px] text-lightGreen text-xl sm:text-3xl font-semibold font-archivo text-center leading-lg">Submit successfully!</p>
+                            <div className="success-popup fixed top-[50%] left-[50%] h-[200px] sm:h-[280px] md:h-[350px] w-full max-w-[300px] sm:max-w-[500px] md:max-w-[550px] lg:max-w-[600px] bg-white border border-solid border-darkYellow p-[20px] sm:p-[40px] rounded shadow-[0px_0px_10px_0px_#0000001A] flex justify-center items-center flex-col translate-x-[-50%] translate-y-[-50%] z-[50]">
+                                <p className="mb-[40px] text-black text-xl sm:text-3xl font-semibold font-plusJkarta text-center leading-lg">Your form submitted successfully!</p>
                                 <div className="flex justify-center items-center">
                                     <div className='w-full'>
-                                        <button onClick={handlePopupClose} className="text-white border border-solid border-transparent font-archivo text-8md font-medium px-[24px] py-[14px] leading-[112%] bg-lightGreen uppercase hover:border-lightGreen hover:bg-transparent hover:text-lightGreen transition-all duration-300 ease-linear">OK</button>
+                                        <button onClick={handlePopupClose}>close</button>
                                     </div>
                                 </div>
                             </div>
                         )}
                     </div>
-                    <div className="lg:w-[48%] w-full lg:order-2 order-1">
-                        <Image src="/assets/images/png/appointment.png" alt="appointment-img" width={546} height={769} className="lg:w-[546px] lg:h-[769px] w-full" />
+                    <div className="w-[48%]">
+                        <Image src="/assets/images/png/appointment.png" alt="appointment-img" width={546} height={769} />
                     </div>
                 </div>
             </div>

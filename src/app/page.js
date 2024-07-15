@@ -1,4 +1,5 @@
 import Appointment from "@/components/Appointment";
+import Dropdown from "@/components/Dropdown";
 import Image from "next/image";
 
 export default function Home() {
@@ -6,6 +7,7 @@ export default function Home() {
     <main className="">
      <>
      <Appointment/>
+     {/* <Dropdown/> */}
      </>
     </main>
   );

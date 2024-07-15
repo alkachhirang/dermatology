@@ -1,3 +1,4 @@
+
 'use client';
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -82,7 +83,7 @@ export default function Appointment() {
         if (!regex.MoreInformation.test(formData.MoreInformation)) {
             errors.MoreInformation = "MoreInformation is invalid.";
         }
-        if (selectedOption2 === 'message' && !regex.message2.test(formData.message2)) {
+        if (selectedOption2 === 'message2' && !regex.message2.test(formData.message2)) {
             errors.message2 = "Message2 is invalid.";
         }
         if (selectedOption2 === 'appointment' && !regex.appointment.test(formData.appointment)) {
@@ -132,6 +133,7 @@ export default function Appointment() {
         }));
         setDropdownVisible(false);
     };
+
     const handleOptionSelect2 = (option) => {
         setSelectedOption2(option);
         setFormData((prevFormData) => ({
@@ -217,60 +219,70 @@ export default function Appointment() {
                                     {dropdownVisible && (
                                         <div className="absolute top-full left-0 bg-white border border-t-transparent border-solid border-lightgrey w-full z-10">
                                             <div
-                                                className="px-[14px] py-[10px]  flex items-center gap-3 text-offgrey text-opacity-70 text-base font-normal font-archivo cursor-pointer hover:bg-lightgrey"
-                                                onClick={() => handleOptionSelect('phoneNumber')}
+                                                className="bg-offWhite px-[14px] py-[13px] w-full border-b border-b-lightgrey cursor-pointer"
+                                                onClick={() => handleOptionSelect('message')}
                                             >
-                                                <CustomCheckbox checked={selectedOption === 'phoneNumber'} /> Phone call
+                                                <p className="text-offgrey text-opacity-70 font-archivo text-base font-normal">Secure Message</p>
                                             </div>
                                             <div
-                                                className="px-[14px] py-[10px] flex items-center gap-3 text-offgrey text-opacity-70 text-base font-normal font-archivo cursor-pointer hover:bg-lightgrey"
-                                                onClick={() => handleOptionSelect('message')}
-                                            >  <CustomCheckbox checked={selectedOption === 'message'} />
-                                                Secure Message
+                                                className="bg-offWhite px-[14px] py-[13px] w-full cursor-pointer"
+                                                onClick={() => handleOptionSelect('phoneNumber')}
+                                            >
+                                                <p className="text-offgrey text-opacity-70 font-archivo text-base font-normal">Phone call</p>
                                             </div>
                                         </div>
                                     )}
                                 </div>
-                                <div className="sm:mb-[14px] mb-3">
+                                <div className="w-full mb-3 sm:mb-[14px]">
                                     {selectedOption === 'message' && (
-                                        <div className="w-full">
-                                            <textarea
-                                                required
-                                                className="resize-none placeholder:text-offgrey placeholder:!text-opacity-70 bg-offWhite !text-offgrey text-opacity-70 font-archivo text-base font-normal px-[14px] py-[13px] outline-none w-full border-solid border border-lightgrey"
-                                                type="text"
-                                                placeholder="Message"
-                                                id="message"
-                                                name="message"
-                                                rows="2"
-                                                cols="20"
-                                                value={formData.message}
-                                                onChange={handleChange}
-                                                autoComplete="off"
-                                            />
-                                            {formErrors.message && (
-                                                <p className="error-message font-archivo">{formErrors.message}</p>
-                                            )}
-                                        </div>
+                                        <input
+                                            required
+                                            className="text-base bg-offWhite !text-offgrey placeholder:text-offgrey placeholder:!text-opacity-70 text-opacity-70 h-[50px] font-archivo font-normal p-[13px] outline-none w-full border-solid border border-lightgrey"
+                                            type="text"
+                                            placeholder="Secure Message"
+                                            id="SecureMessage"
+                                            name="SecureMessage"
+                                            value={formData.SecureMessage}
+                                            onChange={handleChange}
+                                            autoComplete="off"
+                                        />
                                     )}
                                     {selectedOption === 'phoneNumber' && (
-                                        <div className="w-full mb-3 sm:mb-[14px]">
-                                            <input
-                                                required
-                                                className="text-base bg-offWhite !text-offgrey placeholder:text-offgrey placeholder:!text-opacity-70 text-opacity-70 h-[50px] font-archivo font-normal p-[13px] outline-none w-full border-solid border border-lightgrey"
-                                                type="text"
-                                                placeholder="Phone Number"
-                                                id="phoneNumber"
-                                                name="phoneNumber"
-                                                value={formData.phoneNumber}
-                                                onChange={handleChange}
-                                                autoComplete="off"
-                                            />
-                                            {formErrors.phoneNumber && (
-                                                <p className="error-message font-archivo">{formErrors.phoneNumber}</p>
-                                            )}
-                                        </div>
+                                        <input
+                                            required
+                                            className="text-base bg-offWhite !text-offgrey placeholder:text-offgrey placeholder:!text-opacity-70 text-opacity-70 h-[50px] font-archivo font-normal p-[13px] outline-none w-full border-solid border border-lightgrey"
+                                            type="tel"
+                                            placeholder="Phone Number"
+                                            id="phoneNumber"
+                                            name="phoneNumber"
+                                            value={formData.phoneNumber}
+                                            onChange={handleChange}
+                                            autoComplete="off"
+                                        />
+                                    )}
+                                    {selectedOption === 'message' && formErrors.SecureMessage && (
+                                        <p className="error-message font-archivo">{formErrors.SecureMessage}</p>
+                                    )}
+                                    {selectedOption === 'phoneNumber' && formErrors.phoneNumber && (
+                                        <p className="error-message font-archivo">{formErrors.phoneNumber}</p>
                                     )}
                                 </div>
+                            </div>
+                            <div className="w-full mb-3 sm:mb-[14px]">
+                                <input
+                                    required
+                                    className="text-base bg-offWhite !text-offgrey placeholder:text-offgrey placeholder:!text-opacity-70 text-opacity-70 h-[50px] font-archivo font-normal p-[13px] outline-none w-full border-solid border border-lightgrey"
+                                    type="text"
+                                    placeholder="More Information"
+                                    id="MoreInformation"
+                                    name="MoreInformation"
+                                    value={formData.MoreInformation}
+                                    onChange={handleChange}
+                                    autoComplete="off"
+                                />
+                                {formErrors.MoreInformation && (
+                                    <p className="error-message font-archivo">{formErrors.MoreInformation}</p>
+                                )}
                             </div>
                             <div>
                                 <div className="w-full mb-3 sm:mb-[14px] relative">
@@ -278,98 +290,103 @@ export default function Appointment() {
                                         className="bg-offWhite px-[14px] py-[13px] w-full border-solid border border-lightgrey flex justify-between items-center cursor-pointer"
                                         onClick={() => setDropdownVisible2(!dropdownVisible2)}
                                     >
-                                        <p className="text-offgrey text-opacity-70 font-archivo text-base font-normal">{selectedOption2 === 'message' ? 'More information' : 'Appointment'}</p>
+                                        <p className="text-offgrey text-opacity-70 font-archivo text-base font-normal">{selectedOption2 === 'message2' ? 'Message2' : 'appointment'}</p>
                                         <Arrow onClick={() => setDropdownVisible2(!dropdownVisible2)} rotated={dropdownVisible2} />
                                     </div>
                                     {dropdownVisible2 && (
-                                        <div className="absolute top-full left-0 bg-white border border-t-transparent border-solid border-lightgrey w-full z-10 transition-all duration-300">
+                                        <div className="absolute top-full left-0 bg-white border border-t-transparent border-solid border-lightgrey w-full z-10">
                                             <div
-                                                className="px-[14px] py-[10px]  flex items-center gap-3 text-offgrey text-opacity-70 text-base font-normal font-archivo cursor-pointer hover:bg-lightgrey"
-                                                onClick={() => handleOptionSelect2('appointment')}
+                                                className="bg-offWhite px-[14px] py-[13px] w-full border-b border-b-lightgrey cursor-pointer"
+                                                onClick={() => handleOptionSelect2('message2')}
                                             >
-                                                <CustomCheckbox checked={selectedOption2 === 'appointment'} /> appointment
+                                                <p className="text-offgrey text-opacity-70 font-archivo text-base font-normal">Message2</p>
                                             </div>
                                             <div
-                                                className="px-[14px] py-[10px] flex items-center gap-3 text-offgrey text-opacity-70 text-base font-normal font-archivo cursor-pointer hover:bg-lightgrey"
-                                                onClick={() => handleOptionSelect2('message2')}
-                                            >  <CustomCheckbox checked={selectedOption2 === 'message2'} />
-                                                information
+                                                className="bg-offWhite px-[14px] py-[13px] w-full cursor-pointer"
+                                                onClick={() => handleOptionSelect2('appointment')}
+                                            >
+                                                <p className="text-offgrey text-opacity-70 font-archivo text-base font-normal">appointment</p>
                                             </div>
                                         </div>
                                     )}
                                 </div>
-                                {selectedOption2 === 'message2' && (
-                                    <div className="w-full mb-3 sm:mb-[14px]">
-                                        <textarea
+                                <div className="w-full mb-3 sm:mb-[14px]">
+                                    {selectedOption2 === 'message2' && (
+                                        <input
                                             required
-                                            className="resize-none placeholder:text-offgrey placeholder:!text-opacity-70 bg-offWhite !text-offgrey text-opacity-70 font-archivo text-base font-normal px-[14px] py-[13px] outline-none w-full border-solid border border-lightgrey"
+                                            className="text-base bg-offWhite !text-offgrey placeholder:text-offgrey placeholder:!text-opacity-70 text-opacity-70 h-[50px] font-archivo font-normal p-[13px] outline-none w-full border-solid border border-lightgrey"
                                             type="text"
-                                            placeholder="Information Requested"
+                                            placeholder="Message2"
                                             id="message2"
                                             name="message2"
-                                            rows="2"
-                                            cols="20"
                                             value={formData.message2}
                                             onChange={handleChange}
                                             autoComplete="off"
                                         />
-                                        {formErrors.message2 && (
-                                            <p className="error-message font-archivo">{formErrors.message2}</p>
-                                        )}
-                                    </div>
-                                )}
-                                {selectedOption2 === 'appointment' && (
-                                    <div className="w-full mb-3 sm:mb-[14px]">
-                                        <textarea
+                                    )}
+                                    {selectedOption2 === 'appointment' && (
+                                        <input
                                             required
-                                            className="text-base resize-none bg-offWhite !text-offgrey placeholder:text-offgrey placeholder:!text-opacity-70 text-opacity-70 font-archivo font-normal p-[13px] outline-none w-full border-solid border border-lightgrey"
+                                            className="text-base bg-offWhite !text-offgrey placeholder:text-offgrey placeholder:!text-opacity-70 text-opacity-70 h-[50px] font-archivo font-normal p-[13px] outline-none w-full border-solid border border-lightgrey"
                                             type="text"
-                                            placeholder="Comments/Information Requested"
+                                            placeholder="appointment"
                                             id="appointment"
                                             name="appointment"
-                                            rows="3"
-                                            cols="20"
                                             value={formData.appointment}
                                             onChange={handleChange}
                                             autoComplete="off"
                                         />
-                                        {formErrors.appointment && (
-                                            <p className="error-message font-archivo">{formErrors.appointment}</p>
-                                        )}
-                                    </div>
-                                )}
-                            </div>
-                            {/*-----------------checkbox-------------------*/}
-                            <div className="w-full sm:mb-[32px] mb-[40px] p-[9.5px_2px_9.5px_15px] bg-offGreen">
-                                <CheckboxGreen
-                                    name="box"
-                                    checked={formData.box}
-                                    onChange={handleChange}
-                                >
-                                    <span className="text-black text-opacity-70 font-archiv text-sm font-normal leading-[151%]">   "I hereby request to be contacted for the purpose of obtaining general marketing information about the devices / treatments listed above.  I acknowledge that this information is not medical advice, and that any patient-specific advice or informed consent shall only be obtained at a visit with a qualified professional (MD/PA-C) on our staff."
-                                    </span> </CheckboxGreen>
-                                {formErrors.box && (
-                                    <p onChange={handleChange} className="error-message font-plusJkarta">{formErrors.box}</p>
-                                )}
-                            </div>
-                            <button type="submit" className="text-white border border-solid border-transparent font-archivo text-8md font-medium px-[24px] py-[14px] leading-[112%] bg-lightGreen uppercase hover:border-lightGreen hover:bg-transparent hover:text-lightGreen transition-all duration-300 ease-linear">Contact Us</button>
-                        </form>
-                        {showSuccessPopup && (
-                            <div className="success-popup fixed top-[50%] left-[50%] h-[200px] sm:h-[280px] md:h-[350px] w-full max-w-[300px] sm:max-w-[500px] md:max-w-[550px] lg:max-w-[600px] bg-white border border-solid border-lightGreen p-[20px] sm:p-[40px] rounded shadow-[0px_0px_10px_0px_#0000001A] flex justify-center items-center flex-col translate-x-[-50%] translate-y-[-50%] z-[50]">
-                                <p className="mb-[40px] text-lightGreen text-xl sm:text-3xl font-semibold font-archivo text-center leading-lg">Submit successfully!</p>
-                                <div className="flex justify-center items-center">
-                                    <div className='w-full'>
-                                        <button onClick={handlePopupClose} className="text-white border border-solid border-transparent font-archivo text-8md font-medium px-[24px] py-[14px] leading-[112%] bg-lightGreen uppercase hover:border-lightGreen hover:bg-transparent hover:text-lightGreen transition-all duration-300 ease-linear">OK</button>
-                                    </div>
+                                    )}
+                                    {selectedOption2 === 'message2' && formErrors.message2 && (
+                                        <p className="error-message font-archivo">{formErrors.message2}</p>
+                                    )}
+                                    {selectedOption2 === 'appointment' && formErrors.appointment && (
+                                        <p className="error-message font-archivo">{formErrors.appointment}</p>
+                                    )}
                                 </div>
                             </div>
-                        )}
+                            <div className="w-full flex items-start gap-2 mb-3 sm:mb-[14px]">
+                                <CustomCheckbox id="box" name="box" checked={formData.box} onChange={handleChange} />
+                                <label htmlFor="box" className="text-offgrey text-opacity-70 font-archivo text-base font-normal">I agree to the <span className="text-lightGreen">terms of services</span> and <span className="text-lightGreen">privacy policy</span></label>
+                            </div>
+                            {formErrors.box && (
+                                <p className="error-message font-archivo">{formErrors.box}</p>
+                            )}
+                            <div className="w-full">
+                                <button
+                                    type="submit"
+                                    className="bg-darkGreen text-white text-base font-archivo font-semibold py-[13px] px-[54px] uppercase"
+                                >
+                                    Contact us
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                    <div className="lg:w-[48%] w-full lg:order-2 order-1">
-                        <Image src="/assets/images/png/appointment.png" alt="appointment-img" width={546} height={769} className="lg:w-[546px] lg:h-[769px] w-full" />
+                    <div className="lg:w-[47.81%] w-full order-1 lg:order-2 mb-[30px] lg:mb-0">
+                        <Image
+                            src="/appointment.jpg"
+                            alt="Appointment"
+                            width={581}
+                            height={693}
+                            layout="responsive"
+                        />
                     </div>
                 </div>
             </div>
+            {showSuccessPopup && (
+                <div className="success-popup fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-20 bg-black bg-opacity-50">
+                    <div className="bg-white p-6 rounded shadow-lg text-center">
+                        <h2 className="text-xl font-semibold mb-4">Success!</h2>
+                        <p className="mb-4">Your form has been successfully submitted.</p>
+                        <button
+                            className="bg-darkGreen text-white py-2 px-4 rounded"
+                            onClick={handlePopupClose}
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

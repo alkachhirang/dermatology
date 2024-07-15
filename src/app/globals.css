@@ -4,3 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
+.error-message {
+    color: #ff0000;
+    margin-top: 5px;
+  }
