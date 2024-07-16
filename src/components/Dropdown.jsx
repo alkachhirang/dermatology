@@ -38,7 +38,7 @@ const Dropdown = ({ defaultSelected, onSelect, dropdownList }) => {
                 onClick={() => {
                     setDropdownActive(!dropdownActive);
                 }}
-                className="flex justify-between items-center border border-black border-opacity-5 px-3.5 py-[13px] cursor-pointer mb-[14px]"
+                className="flex justify-between items-center border border-black border-opacity-5 px-3.5 py-[12px] cursor-pointer mb-[14px]"
             >
                 <p className="text-base font-archivo text-offgrey text-opacity-70 font-normal">
                     {selectedOption || dropdownList[0]} {/* Ensure default fallback */}
