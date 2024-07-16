@@ -248,7 +248,7 @@ export default function Appointment() {
                                     checked={formData.box}
                                     onChange={handleChange}
                                 >
-                                    <span className="text-black text-opacity-70 font-archiv text-sm font-normal leading-[151%]">   "I hereby request to be contacted for the purpose of obtaining general marketing information about the devices / treatments listed above.  I acknowledge that this information is not medical advice, and that any patient-specific advice or informed consent shall only be obtained at a visit with a qualified professional (MD/PA-C) on our staff."
+                                    <span className="text-black text-opacity-70 font-archiv text-sm font-normal leading-[151%]">   I hereby request to be contacted for the purpose of obtaining general marketing information about the devices / treatments listed above.  I acknowledge that this information is not medical advice, and that any patient-specific advice or informed consent shall only be obtained at a visit with a qualified professional (MD/PA-C) on our staff.
                                     </span> </CheckboxGreen>
                                 {formErrors.box && (
                                     <p onChange={handleChange} className="error-message font-plusJkarta">{formErrors.box}</p>
