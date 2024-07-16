@@ -141,7 +141,7 @@ export default function Appointment() {
                             <h1 className="font-kaushan font-normal text-lightGreen text-md leading-[144%]">Appointment</h1>
                             <span className="w-[60px] h-[2px] bg-lightGreen"></span>
                         </div>
-                        <h2 className="font-archivo text-darkGreen mb-2 sm:mb-3 uppercase text-3xl sm:text-4xl xl:text-5xl font-semibold lg:max-w-[484px] !leading-[130%] text-center lg:text-start">Book Your Appointment Now</h2>
+                        <h2 className="font-archivo text-darkGreen mb-2 sm:mb-[15px] uppercase text-3xl sm:text-4xl xl:text-5xl font-semibold lg:max-w-[484px] !leading-[130%] text-center lg:text-start">Book Your Appointment Now</h2>
                         <p className="font-archivo text-grey font-normal text-sm sm:text-base text-center lg:text-start">Have questions or ready to schedule your appointment? Reach out to our friendly team today. <span className="text-lightGreen cursor-pointer">Click here to Instantly Book Online</span></p>
                         <form className="mt-[24px]" onSubmit={handleSubmit}>
                             <div className='flex sm:flex-row flex-col sm:gap-4'>
