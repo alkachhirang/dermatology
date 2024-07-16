@@ -17,7 +17,7 @@ const CheckboxGreen = ({ name, checked, onChange }) => {
                     <CheckSvg2 />
                 )}
             </span>
-            <span className="text-black text-opacity-70 font-archivo text-sm font-normal leading-[151%] mt-[- 4px]">I hereby request to be contacted for the purpose of obtaining general marketing information about the devices / treatments listed above.  I acknowledge that this information is not medical advice, and that any patient-specific advice or informed consent shall only be obtained at a visit with a qualified professional (MD/PA-C) on our staff.
+            <span className="text-black text-opacity-70 font-archivo text-sm font-normal leading-[151%] mt-[- 4px]">"I hereby request to be contacted for the purpose of obtaining general marketing information about the devices / treatments listed above.  I acknowledge that this information is not medical advice, and that any patient-specific advice or informed consent shall only be obtained at a visit with a qualified professional (MD/PA-C) on our staff ."
             </span>
         </label>
     );
